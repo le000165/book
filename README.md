@@ -3,4 +3,4 @@
 # Author: Phong Le
 ### Live demo: https://le000165.github.io/book/ 
 
-### Icon is using from: [flaticon.com](flaticon.com) 
+### Icon is using from: https://flaticon.com
