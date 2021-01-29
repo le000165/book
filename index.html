@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Library</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="logo.png" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css"
+        integrity="sha512-HK5fgLBL+xu6dm/Ii3z4xhlSUyZgTT9tuc/hSrtw6uzJOvgRr2a9jyxxT1ely+B+xFAmJKVSTbpM/CuL7qxO8w=="
+        crossorigin="anonymous" />
+    <script src="script.js" defer></script>
+</head>
+
+<body>
+    <!-- Header Section of the page -->
+    <header>
+        <div class="logo-container">
+            <img class="logo" src="./logo.png" alt="logo">
+            <h2>My Library</h2>
+        </div>
+        <button class="btn" id="switch">Light Mode</button>
+    </header>
+    <!-- <div class="alert">Success</div> -->
+
+    <!-- Add button, popup an add form -->
+    <button class="btn" id="add-btn">Add New</button>
+
+    <!-- overlay to dim the screen -->
+    <div id="overlay"></div>
+
+    <!--  -->
+    <div class="books-container">
+        <!-- Adds books here, the following is e.g of a book node: -->
+        <!-- <div class="book">
+            <i class="fas fa-times"></i>
+            <div class="book-title">
+                <h1>Book Title</h1>
+            </div>
+            <h3>Author Name</h3>
+            <div class="isRead">Read</div>
+        </div> -->
+
+    </div>
+
+    <!-- Popup section -->
+    <section id=popup>
+        <div class="wrapper">
+            <div class="popup-header">
+                <h1>New Book</h1>
+                <i class="fas fa-times" id="close-popup"></i>
+            </div>
+            <form name="addForm" id="add-form">
+                <input type="text" id="title" name="title" placeholder="Title" autocomplete="off" required />
+                <input type="text" id="author" name="author" placeholder="Author" autocomplete="off" required />
+                <input type="number" id="pages" name="pages" placeholder="Number of pages" autocomplete="off"
+                    required />
+                <select name="isRead" id="is-read">
+                    <option value="true">Read</option>
+                    <option value="false">Not Read Yet</option>
+                </select>
+                <button class="btn" id="submit-btn" type="submit" name="submit">Submit</button>
+            </form>
+        </div>
+    </section>
+</body>
+
+</html>

@@ -1,0 +1,373 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+
+:root {
+    --white: #fafafa;
+    --light-blue: #dbe2ef;
+    --blue2: #a2d5f2;
+    --black: #303841;
+    --dark1: #112d4e;
+    --green: #00af91;
+    --light-green: #16c79a;
+    --blue: #3f72af;
+    --yellow: #f3c623;
+    --red: #eb596e;
+    --orange: #ffa45b;
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: inherit;
+}
+
+html {
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background: var(--light-blue);
+    position: relative;
+    color: var(--white);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* ------- HEADERS ------- */
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: absolute;
+    top: 0%;
+    width: 100%;
+    background: var(--dark1);
+    color: var(--white);
+    padding: 0.5rem 5rem;
+}
+
+.logo-container {
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.logo-container h2 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-width: 8rem;
+}
+
+.logo-container img {
+    width: 5rem;
+}
+
+#overlay {
+    position: absolute;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.3);
+    pointer-events: none;
+    opacity: 0;
+    transition: 0.5s ease;
+}
+
+/*----------- Popup Section -------------*/
+#popup {
+    transform: scale(0);
+    transition: 0.5s ease;
+    width: 25rem;
+    height: 32rem;
+    border-radius: 2rem;
+    font-size: 1.3rem;
+    padding: 1rem;
+    color: var(--white);
+    background: var(--dark1);
+    box-shadow: 0px 10px 15px 0px var(--black);
+}
+
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    font-size: 1.3rem;
+    height: 100%;
+}
+
+.popup-header {
+    display: flex;
+}
+
+.popup-header i {
+    position: relative;
+    cursor: pointer;
+    font-size: 1.6rem;
+    transition: all 0.3s ease;
+}
+
+.popup-header i:hover {
+    color: var(--red);
+}
+
+.popup-header h1 {
+    position: relative;
+    left: 1rem;
+    margin: 0 auto;
+    height: 2rem;
+}
+
+#add-form {
+    margin-top: 2rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    height: 100%;
+}
+
+#add-form input {
+    background: var(--dark1);
+    outline: none;
+    border: none;
+    border-bottom: 3px solid var(--light-blue);
+    color: var(--white);
+    font-size: 1.2rem;
+    padding: 0.5rem;
+}
+
+#add-form input::placeholder {
+    color: var(--white);
+    opacity: 1;
+}
+
+#add-form input:focus {
+    border-bottom: 3px solid var(--yellow);
+}
+
+#add-form select {
+    margin: 0 auto;
+    font-size: 1.3rem;
+    background: var(--light-blue);
+    border: none;
+    border-radius: 0.25rem;
+    width: 70%;
+    padding: 0.4rem;
+    outline: none;
+}
+
+/* Remove IE arrow */
+#add-form select::-ms-expand {
+    display: none;
+}
+
+/*----------- Buttons -------------*/
+.btn {
+    outline: none;
+    font-size: 1.3rem;
+    width: 9rem;
+    height: 3rem;
+    cursor: pointer;
+    transition: 0.1s ease;
+}
+
+#add-btn {
+    border: 0.15em solid var(--dark1);
+    color: var(--dark1);
+    position: fixed;
+    bottom: 8%;
+    right: 3%;
+    background-color: var(--light-blue);
+}
+
+#add-btn:hover {
+    background-color: var(--dark1);
+    color: var(--white);
+}
+
+#switch {
+    border: 0.2rem solid var(--yellow);
+    color: var(--white);
+    background: var(--dark1);
+}
+
+#switch:hover {
+    background-color: var(--yellow);
+    color: var(--dark1);
+}
+
+#submit-btn {
+    border: 0.15rem solid var(--yellow);
+    color: var(--white);
+    background-color: var(--dark1);
+    margin: 0 auto;
+    position: relative;
+    bottom: 0.6rem;
+}
+
+#submit-btn:hover {
+    background-color: var(--yellow);
+    color: var(--dark1);
+}
+
+/* ----------- Book container --------- */
+.books-container {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    flex: 1;
+    max-width: 1000;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    position: absolute;
+    top: 10rem;
+    left: 3rem;
+    margin-right: 10rem;
+}
+
+.book {
+    display: flex;
+    color: var(--white);
+    background: var(--dark1);
+    width: 25rem;
+    border-radius: 1rem;
+    margin: 2rem 5rem;
+    text-align: center;
+    flex-direction: column;
+    transition: all 0.5s ease;
+}
+
+.book h2 {
+    overflow-wrap: break-word;
+    position: relative;
+    color: var(--red);
+}
+
+.book-title {
+    height: 5rem;
+    flex: 1;
+}
+
+.book i {
+    font-size: 1.4rem;
+    width: 3rem;
+    cursor: pointer;
+    margin: 0 auto;
+    position: relative;
+    top: 0.5rem;
+    left: 11.2rem;
+}
+
+.isRead {
+    font-size: 1.4rem;
+    line-height: 3.5rem;
+    position: relative;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    top: 47px;
+    background: var(--dark1);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    border-top: 4px solid var(--white);
+}
+
+.isRead:hover {
+    background: var(--light-green);
+}
+
+.book i:hover {
+    color: var(--red);
+}
+
+/*------------- Alerts ---------------*/
+.alert {
+    color: var(--white);
+    font-size: 1.2rem;
+    display: block;
+    position: absolute;
+    top: 6rem;
+    width: 50%;
+    padding: 0.3rem;
+    text-align: center;
+    transition: all 1s ease-in;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    background: #c9cbff;
+    color: var(--white);
+}
+
+
+/* ----------- Extra class for JavaScript --------- */
+.complete-book {
+    background: var(--green);
+}
+
+.disable-event {
+    pointer-events: none;
+}
+
+.fall {
+    transform: translateY(8rem) rotateZ(20deg);
+    opacity: 0;
+}
+
+/* responsive */
+
+@media screen and (max-width : 800px) {
+    html {
+        font-size: 12px;
+    }
+
+    header {
+        justify-content: space-evenly;
+        padding: 1rem;
+        padding-bottom: 5rem;
+    }
+
+    /* buttons */
+    #switch {
+        width: 10rem;
+    }
+
+    #add-btn {
+        position: absolute;
+        width: 10rem;
+        top: 10%;
+        right: 12%;
+        border: 0.2rem solid var(--yellow);
+        color: var(--white);
+        background: var(--dark1);
+    }
+
+    .alert {
+        border-radius: 3rem;
+        position: absolute;
+        top: 10%;
+        left: 8%;
+        color: var(--dark1);
+    }
+
+
+    .logo-container img {
+        width: 5rem;
+        height: 5rem;
+    }
+
+    .books-container {
+        font-size: 0.8rem;
+        flex-direction: column;
+        left: 0;
+        width: 100%;
+    }
+
+    .book {
+        margin-top: 5rem;
+        flex-direction: column;
+        transition: all 0.5s ease;
+    }
+}
