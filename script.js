@@ -7,79 +7,87 @@ const addForm = document.querySelector('#add-form');
 const cardList = document.querySelector('.books-container');
 const body = document.getElementsByTagName('body')[0];
 const header = document.getElementsByTagName('header')[0];
-const darkModeButton = document.querySelector('.switch');
 
-
-
-// ------------------ Book: represent a book---------------------------
+// ================== Book: represent a book ========================
 function Book(title, author, pages, isRead) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.isRead = isRead;
 }
-// -------Storage: handles books data in local storage for now ---------
-// getBooksFromStorage
-function getBooksFromStorage() {
-    let books;
-    if (localStorage.getItem('books') === null) {
-        books = [];
-    } else {
-        books = JSON.parse(localStorage.getItem('books'));
+
+// ================== Storage: handles books data in local storage for now ==========
+// Storage must be instantiated before using
+// will cause error if calling anythying outside of Storage scope
+// user can not access and change local variable of Storage unless accessing by Storage object
+function BookStorage() {
+    // Initializing the books item in the local storage
+    this.books = [];
+}
+
+// reset local storage when there is any change to the books array above
+BookStorage.prototype.resetStorageItem = function () {
+    localStorage.setItem('books', JSON.stringify(this.books));
+}
+
+
+// get all books from storage
+BookStorage.prototype.getBooksFromStorage = function () {
+    if (localStorage.getItem('books') !== null) {
+        this.books = JSON.parse(localStorage.getItem('books'));
     }
-    return books;
+    return this.books;
 }
 
 // addBookToStorage
-function addBookToStorage(book) {
-    const books = getBooksFromStorage();
-    books.push(book);
+BookStorage.prototype.addBookToStorage = function (book) {
+    this.getBooksFromStorage().push(book);
     // reset local storage with new book array
-    localStorage.setItem('books', JSON.stringify(books));
+    this.resetStorageItem();
 }
 
 // removeBookInStorage
-function removeBookInStorage(title, author) {
-    const books = getBooksFromStorage();
-
-    books.forEach((book, index) => {
+BookStorage.prototype.removeBookInStorage = function (title, author) {
+    this.getBooksFromStorage().forEach((book, index) => {
         if (book.title == title && book.author == author) {
-            books.splice(index, 1);
+            this.books.splice(index, 1);
         }
     });
-
     // reset local storage with new book array
-    localStorage.setItem('books', JSON.stringify(books));
+    this.resetStorageItem();
 }
 
-// removeBookInStorage
-function changeBookStatusInStorage(title, author) {
-    const books = getBooksFromStorage();
-
-    books.forEach((book) => {
-        if (book.title == title && book.author == author) {
-            if (book.isRead) {
-                book.isRead = false;
+// update reading status by title and author name
+BookStorage.prototype.changeBookStatusInStorage = function (title, author) {
+    this.getBooksFromStorage().forEach((b) => {
+        if (b.title == title && b.author == author) {
+            if (b.isRead) {
+                b.isRead = false;
+                console.log(b);
             } else {
-                book.isRead = true;
+                b.isRead = true;
             }
         }
     });
-
     // reset local storage with new book array
-    localStorage.setItem('books', JSON.stringify(books));
+    this.resetStorageItem();
 }
 
-// ------------------ UI: handles user interface tasks -----------------
+// ==================== UI: handles user interface tasks ===================
+// UserInterface function constructor
+function UserInterface(storage) {
+    this.titleInput = document.querySelector('#title');
+    this.authorInput = document.querySelector('#author');
+    this.pagesInput = document.querySelector('#pages');
+    this.storage = storage;
+}
 // Display all book to the webpage list
-function displayBooks() {
-    // pretending books data from local storage
-    const books = getBooksFromStorage();
-    books.forEach(b => addBookToList(b));
+UserInterface.prototype.displayBooks = function () {
+    this.storage.getBooksFromStorage().forEach(b => this.addBookToList(b));
 }
 
 // addBookToList
-function addBookToList(book) {
+UserInterface.prototype.addBookToList = function (book) {
     // one book container
     const bookCard = document.createElement("div");
     bookCard.classList.add('book');
@@ -112,29 +120,27 @@ function addBookToList(book) {
 }
 
 // open popup add form
-function openAddForm() {
+UserInterface.prototype.openAddForm = function () {
     popupSection.style.transform = "scale(1)";
     overlay.style.opacity = 1;
 
     // disable add button when the form is open
     addButton.classList.toggle('disable-event');
-    darkModeButton.classList.toggle('disable-event');
 }
 
 // close popup add form
-function closeAddForm() {
+UserInterface.prototype.closeAddForm = function () {
     popupSection.style.transform = "scale(0)";
     overlay.style.opacity = 0;
-    clearFields();
+    this.clearFields();
     // disable add button when the form is open
     addButton.classList.toggle('disable-event');
-    darkModeButton.classList.toggle('disable-event');
 }
 
-// addbook when submit
-function submitBook(e) {
+// addbook when submit, this function using event parameter from the event listener that calls it
+UserInterface.prototype.submitBook = function (event) {
     // prevent default action of being submit
-    e.preventDefault();
+    event.preventDefault();
 
     //get form values
     const titleInput = document.querySelector('#title').value;
@@ -146,35 +152,34 @@ function submitBook(e) {
     const book = new Book(titleInput, authorInput, pagesInput, isReadInput);
 
     // Add book to UI
-    addBookToList(book);
+    this.addBookToList(book);
 
     // Add book to local storage
-    addBookToStorage(book);
+    this.storage.addBookToStorage(book);
 
     // close the form after successful submit a book 
-    closeAddForm();
-    showAlertUI('Book Added');
+    this.closeAddForm();
+    this.showAlertUI('Book Added');
 }
 
-function clearFields() {
-    document.querySelector('#title').value = '';
-    document.querySelector('#author').value = '';
-    document.querySelector('#pages').value = '';
+// clearing all input form fields of UI
+UserInterface.prototype.clearFields = function () {
+    this.titleInput.value = '';
+    this.authorInput.value = '';
+    this.pagesInput.value = '';
 }
-
-
 
 // remove a book from the UI
-function removeBookUI(e) {
+UserInterface.prototype.removeBookUI = function (e) {
     const element = e.target;
     if (element.classList.contains('remove')) {
         const book = e.target.parentElement;
         const title = book.getElementsByTagName('h2')[0].textContent;
         const author = book.getElementsByTagName('h3')[0].textContent;
-        showAlertUI(`Removed ${title}`);
+        this.showAlertUI(`Removed ${title}`);
 
         // remove from local storage
-        removeBookInStorage(title, author);
+        this.storage.removeBookInStorage(title, author);
 
         // Animation
         book.classList.add('fall');
@@ -187,7 +192,7 @@ function removeBookUI(e) {
 }
 
 // check completed a book for UI
-function checkCompleteBookUI(e) {
+UserInterface.prototype.checkCompleteBookUI = function (e) {
     const element = e.target;
     if (element.classList.contains('isRead')) {
         const book = e.target.parentElement;
@@ -203,13 +208,16 @@ function checkCompleteBookUI(e) {
             isReadButton.textContent = 'Read'
         }
 
-        // update read status in local storage
-        changeBookStatusInStorage(title, author);
+        // show alert
+        this.showAlertUI('Status Updated');
+
+        // update read status in local BookStorage
+        this.storage.changeBookStatusInStorage(title, author);
     }
 }
 
 // show alert
-function showAlertUI(message) {
+UserInterface.prototype.showAlertUI = function (message) {
     const div = document.createElement('div');
     div.className = 'alert';
     div.appendChild(document.createTextNode(message));
@@ -217,44 +225,27 @@ function showAlertUI(message) {
     body.insertBefore(div, addButton);
 
     // Vanish in 3 seconds
-    setTimeout(() => document.querySelector('.alert').remove(), 3000);
+    setTimeout(() => document.querySelector('.alert').remove(), 1500);
 }
-
-// toggle dark mode
-function darkModeUI(e) {
-    // change to dark mode
-    darkModeButton.classList.toggle('switch-dark-mode');
-    body.classList.toggle('dark-screen');
-    header.classList.toggle('header-dark-mode');
-    addButton.classList.toggle('add-btn-dark-mode');
-    const books = document.querySelectorAll('.book');
-    if (books.length > 0) {
-        books.forEach(b => {
-            b.classList.toggle('book-dark-mode')
-        })
-    }
-
-}
-
 
 // ------------------ Events Handler -----------------
+// setup
+const userStorage = new BookStorage()
+const ui = new UserInterface(userStorage);
 
 // Event: Display books
-document.addEventListener('DOMContentLoaded', displayBooks)
+document.addEventListener('DOMContentLoaded', () => ui.displayBooks());
 
 // Event: open submit form
-addButton.addEventListener('click', openAddForm);
+addButton.addEventListener('click', () => ui.openAddForm());
 
 // Event: close submit form
-closeFormBtn.addEventListener('click', closeAddForm);
+closeFormBtn.addEventListener('click', () => ui.closeAddForm());
 
 // Event: Add a Book when click submit form 
-addForm.addEventListener('submit', submitBook);
+addForm.addEventListener('submit', e => ui.submitBook(e));
 // Event: Remove a book
-cardList.addEventListener('click', removeBookUI);
+cardList.addEventListener('click', e => ui.removeBookUI(e));
 
 // Event: Toggle check a book is completed
-cardList.addEventListener('click', checkCompleteBookUI);
-
-// Event: Toggle Dark mode
-darkModeButton.addEventListener('click', darkModeUI);
+cardList.addEventListener('click', e => ui.checkCompleteBookUI(e));

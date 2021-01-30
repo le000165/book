@@ -1,4 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Slab&display=swap');
+
 
 :root {
     --white: #fafafa;
@@ -68,7 +69,7 @@ header {
 }
 
 #overlay {
-    position: absolute;
+    position: fixed;
     left: 0;
     top: 0;
     right: 0;
@@ -177,28 +178,24 @@ header {
 }
 
 .add-btn {
-    border: 0.15em solid var(--dark1);
-    color: var(--dark1);
+    font-size: 1.5rem;
+    border: none;
+    border-radius: 50%;
+    color: var(--white);
     position: fixed;
+    width: 4rem;
+    height: 4rem;
     bottom: 8%;
     right: 3%;
-    background-color: var(--light-blue);
+    background-color: var(--green);
+    border: 0.15em solid var(--light-blue);
+    transition: all 0.5s ease;
 }
 
 .add-btn:hover {
-    background-color: var(--dark1);
-    color: var(--white);
-}
-
-.switch {
-    border: 0.2rem solid var(--yellow);
-    color: var(--white);
-    background: var(--dark1);
-}
-
-.switch:hover {
-    background-color: var(--yellow);
-    color: var(--dark1);
+    background-color: var(--light-blue);
+    border: 0.15em solid var(--light-green);
+    color: var(--green);
 }
 
 #submit-btn {
@@ -228,6 +225,7 @@ header {
     top: 10rem;
     left: 3rem;
     margin-right: 10rem;
+    padding-bottom: 3rem;
 }
 
 .book {
@@ -248,6 +246,7 @@ header {
 .book h2 {
     overflow-wrap: break-word;
     position: relative;
+    margin: 1rem;
     color: var(--red);
 }
 
@@ -290,7 +289,6 @@ header {
 
 /*------------- Alerts ---------------*/
 .alert {
-    color: var(--white);
     font-size: 1.2rem;
     display: block;
     position: absolute;
@@ -302,7 +300,7 @@ header {
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     background: #c9cbff;
-    color: var(--white);
+    color: var(--dark1);
 }
 
 
@@ -320,73 +318,39 @@ header {
     opacity: 0;
 }
 
-/*----------- dark mode ----------- */
-.dark-screen {
-    background: var(--dark1);
-    color: var(--light-blue);
-}
-
-.switch-dark-mode {
-    background: var(--white);
-    color: var(--dark1);
-    border-color: var(--dark1);
-}
-
-.header-dark-mode {
-    background: var(--light-blue);
-    color: var(--black);
-}
-
-.book-dark-mode {
-    background: var(--light-blue);
-    color: var(--dark1);
-}
-
-.add-btn-dark-mode {
-    border: 2px solid var(--yellow);
-    background: var(--dark1);
-    color: var(--white);
-}
 
 /*------------------ Mobile Responsive ----------------*/
 
 @media screen and (max-width : 800px) {
     html {
         font-size: 12px;
+        background: linear-gradient(#e66465, #9198e5);
+        background-attachment: fixed;
+        font-family: 'Roboto Slab', serif;
     }
 
-    header {
-        justify-content: space-evenly;
-        padding: 1rem;
-        padding-bottom: 5rem;
-    }
-
-    /* buttons */
-    .switch {
-        width: 10rem;
+    body {
+        background: linear-gradient(#e66465, #9198e5);
+        background-attachment: fixed;
     }
 
     .add-btn {
         position: fixed;
         display: flex;
-        width: 100%;
-        right: 0;
-        bottom: 0;
-        border-radius: 10rem;
-        font-size: 1.7rem;
-        height: 4rem;
         justify-content: center;
         align-items: center;
-        border: none;
-        color: var(--white);
-        background: var(--dark1);
+        right: 5%;
+        bottom: 5%;
+        font-size: 1.3rem;
+    }
+
+    .add-btn:hover {
+        transform: rotate(45deg);
     }
 
     .alert {
         border-radius: 3rem;
         position: fixed;
-        top: 12%;
-        color: var(--dark1);
     }
 
 
@@ -396,29 +360,31 @@ header {
     }
 
     .books-container {
-        font-size: 0.8rem;
+        font-size: 1rem;
         flex-direction: column;
-        left: 0;
-        width: 100%;
+        justify-content: center;
+        width: 80vw;
+        color: var(--dark1);
+        padding-bottom: 10rem;
     }
 
     .book {
-        font-size: 1.2rem;
-        margin-top: 5rem;
+        font-size: 1.1rem;
+        margin: 5rem auto;
         flex-direction: column;
         transition: all 0.5s ease;
+        background-color: rgba(255, 255, 255, .15);
+        backdrop-filter: blur(5px);
     }
 
-    .add-btn-dark-mode {
-        border: 2px solid var(--yellow);
-        background: var(--dark1);
-        color: var(--white);
+    .book-title h2 {
+        color: var(--dark1)
     }
 
-    .switch-dark-mode {
-        background: var(--white);
-        color: var(--dark1);
-        border-color: var(--dark1);
+
+    /* Form style */
+    #add-form input {
+        border-radius: 0;
     }
 }
 
@@ -426,10 +392,59 @@ header {
 @media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
     html {
         font-size: 13px;
+        background: linear-gradient(#e66465, #9198e5);
+        background-attachment: fixed;
+        font-family: 'Roboto Slab', serif;
+    }
+
+    body {
+        background: linear-gradient(#e66465, #9198e5);
+        background-attachment: fixed;
+    }
+
+    .alert {
+        border-radius: 3rem;
+        position: fixed;
     }
 
     .logo-container img {
         width: 5rem;
         height: 5rem;
+    }
+
+
+    .books-container {
+        width: 90vw;
+        color: var(--dark1);
+        padding-bottom: 10rem;
+    }
+
+    .book {
+        font-size: 1.2rem;
+        transition: all 0.5s ease;
+        background-color: rgba(255, 255, 255, .15);
+        backdrop-filter: blur(5px);
+        margin: 4rem;
+    }
+
+    .book-title h2 {
+        color: var(--dark1)
+    }
+
+    .add-btn {
+        position: fixed;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 5rem;
+        height: 5rem;
+        right: 5%;
+        bottom: 5%;
+        font-size: 1.5rem;
+    }
+
+    /* Form style */
+    #add-form input {
+        border-radius: 0;
     }
 }
