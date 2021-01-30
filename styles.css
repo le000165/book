@@ -339,9 +339,11 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
+        width: 6rem;
+        height: 6rem;
         right: 5%;
         bottom: 5%;
-        font-size: 1.3rem;
+        font-size: 2.5rem;
     }
 
     .add-btn:hover {
@@ -436,11 +438,9 @@ header {
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 5rem;
-        height: 5rem;
-        right: 5%;
-        bottom: 5%;
-        font-size: 1.5rem;
+        right: 7%;
+        bottom: 7%;
+        font-size: 2rem;
     }
 
     /* Form style */
