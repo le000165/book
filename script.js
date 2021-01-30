@@ -1,12 +1,14 @@
 // ------------------------- Selectors -------------------------------
-const addButton = document.querySelector('#add-btn');
+const addButton = document.querySelector('.add-btn');
 const popupSection = document.querySelector('#popup');
 const overlay = document.querySelector('#overlay');
-const darkModeBtn = document.querySelector('#switch');
 const closeFormBtn = document.querySelector('#close-popup');
 const addForm = document.querySelector('#add-form');
 const cardList = document.querySelector('.books-container');
 const body = document.getElementsByTagName('body')[0];
+const header = document.getElementsByTagName('header')[0];
+const darkModeButton = document.querySelector('.switch');
+
 
 
 // ------------------ Book: represent a book---------------------------
@@ -116,16 +118,17 @@ function openAddForm() {
 
     // disable add button when the form is open
     addButton.classList.toggle('disable-event');
-    darkModeBtn.classList.toggle('disable-event');
+    darkModeButton.classList.toggle('disable-event');
 }
 
 // close popup add form
 function closeAddForm() {
     popupSection.style.transform = "scale(0)";
     overlay.style.opacity = 0;
+    clearFields();
     // disable add button when the form is open
     addButton.classList.toggle('disable-event');
-    darkModeBtn.classList.toggle('disable-event');
+    darkModeButton.classList.toggle('disable-event');
 }
 
 // addbook when submit
@@ -154,9 +157,9 @@ function submitBook(e) {
 }
 
 function clearFields() {
-    document.querySelector('#title') = '';
-    document.querySelector('#author') = '';
-    document.querySelector('#pages') = '';
+    document.querySelector('#title').value = '';
+    document.querySelector('#author').value = '';
+    document.querySelector('#pages').value = '';
 }
 
 
@@ -205,6 +208,7 @@ function checkCompleteBookUI(e) {
     }
 }
 
+// show alert
 function showAlertUI(message) {
     const div = document.createElement('div');
     div.className = 'alert';
@@ -216,7 +220,23 @@ function showAlertUI(message) {
     setTimeout(() => document.querySelector('.alert').remove(), 3000);
 }
 
-// show alert
+// toggle dark mode
+function darkModeUI(e) {
+    // change to dark mode
+    darkModeButton.classList.toggle('switch-dark-mode');
+    body.classList.toggle('dark-screen');
+    header.classList.toggle('header-dark-mode');
+    addButton.classList.toggle('add-btn-dark-mode');
+    const books = document.querySelectorAll('.book');
+    if (books.length > 0) {
+        books.forEach(b => {
+            b.classList.toggle('book-dark-mode')
+        })
+    }
+
+}
+
+
 // ------------------ Events Handler -----------------
 
 // Event: Display books
@@ -235,3 +255,6 @@ cardList.addEventListener('click', removeBookUI);
 
 // Event: Toggle check a book is completed
 cardList.addEventListener('click', checkCompleteBookUI);
+
+// Event: Toggle Dark mode
+darkModeButton.addEventListener('click', darkModeUI);

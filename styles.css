@@ -176,7 +176,7 @@ header {
     transition: 0.1s ease;
 }
 
-#add-btn {
+.add-btn {
     border: 0.15em solid var(--dark1);
     color: var(--dark1);
     position: fixed;
@@ -185,18 +185,18 @@ header {
     background-color: var(--light-blue);
 }
 
-#add-btn:hover {
+.add-btn:hover {
     background-color: var(--dark1);
     color: var(--white);
 }
 
-#switch {
+.switch {
     border: 0.2rem solid var(--yellow);
     color: var(--white);
     background: var(--dark1);
 }
 
-#switch:hover {
+.switch:hover {
     background-color: var(--yellow);
     color: var(--dark1);
 }
@@ -235,7 +235,10 @@ header {
     color: var(--white);
     background: var(--dark1);
     width: 25rem;
-    border-radius: 1rem;
+    -webkit-border-top-left-radius: 1rem;
+    -webkit-border-top-right-radius: 1rem;
+    border-top-left-radius: 1rem;
+    border-top-right-radius: 1rem;
     margin: 2rem 5rem;
     text-align: center;
     flex-direction: column;
@@ -270,6 +273,7 @@ header {
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
     top: 47px;
+    -webkit-background-: var(--dark1);
     background: var(--dark1);
     transition: all 0.2s ease;
     cursor: pointer;
@@ -316,7 +320,35 @@ header {
     opacity: 0;
 }
 
-/* responsive */
+/*----------- dark mode ----------- */
+.dark-screen {
+    background: var(--dark1);
+    color: var(--light-blue);
+}
+
+.switch-dark-mode {
+    background: var(--white);
+    color: var(--dark1);
+    border-color: var(--dark1);
+}
+
+.header-dark-mode {
+    background: var(--light-blue);
+    color: var(--black);
+}
+
+.book-dark-mode {
+    background: var(--light-blue);
+    color: var(--dark1);
+}
+
+.add-btn-dark-mode {
+    border: 2px solid var(--yellow);
+    background: var(--dark1);
+    color: var(--white);
+}
+
+/*------------------ Mobile Responsive ----------------*/
 
 @media screen and (max-width : 800px) {
     html {
@@ -330,25 +362,30 @@ header {
     }
 
     /* buttons */
-    #switch {
+    .switch {
         width: 10rem;
     }
 
-    #add-btn {
-        position: absolute;
-        width: 10rem;
-        top: 10%;
-        right: 12%;
-        border: 0.2rem solid var(--yellow);
+    .add-btn {
+        position: fixed;
+        display: flex;
+        width: 100%;
+        right: 0;
+        bottom: 0;
+        border-radius: 10rem;
+        font-size: 1.7rem;
+        height: 4rem;
+        justify-content: center;
+        align-items: center;
+        border: none;
         color: var(--white);
         background: var(--dark1);
     }
 
     .alert {
         border-radius: 3rem;
-        position: absolute;
-        top: 10%;
-        left: 8%;
+        position: fixed;
+        top: 12%;
         color: var(--dark1);
     }
 
@@ -366,8 +403,33 @@ header {
     }
 
     .book {
+        font-size: 1.2rem;
         margin-top: 5rem;
         flex-direction: column;
         transition: all 0.5s ease;
+    }
+
+    .add-btn-dark-mode {
+        border: 2px solid var(--yellow);
+        background: var(--dark1);
+        color: var(--white);
+    }
+
+    .switch-dark-mode {
+        background: var(--white);
+        color: var(--dark1);
+        border-color: var(--dark1);
+    }
+}
+
+/* -------- iPad --------- */
+@media only screen and (min-device-width: 834px) and (max-device-width: 1112px) and (-webkit-min-device-pixel-ratio: 2) {
+    html {
+        font-size: 13px;
+    }
+
+    .logo-container img {
+        width: 5rem;
+        height: 5rem;
     }
 }
