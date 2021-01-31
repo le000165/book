@@ -63,7 +63,6 @@ BookStorage.prototype.changeBookStatusInStorage = function (title, author) {
         if (b.title == title && b.author == author) {
             if (b.isRead) {
                 b.isRead = false;
-                console.log(b);
             } else {
                 b.isRead = true;
             }
