@@ -16,6 +16,8 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
 }
 
+
+
 // ================== Storage: handles books data in local storage for now ==========
 // Storage must be instantiated before using
 // will cause error if calling anythying outside of Storage scope
@@ -75,6 +77,7 @@ BookStorage.prototype.changeBookStatusInStorage = function (title, author) {
 // ==================== UI: handles user interface tasks ===================
 // UserInterface function constructor
 function UserInterface(storage) {
+    // input form variables
     this.titleInput = document.querySelector('#title');
     this.authorInput = document.querySelector('#author');
     this.pagesInput = document.querySelector('#pages');
@@ -93,11 +96,20 @@ UserInterface.prototype.addBookToList = function (book) {
 
     // creating a book element
     bookCard.innerHTML = `
-    <i class="fas fa-times remove"></i>
-    <div class="book-title">
-        <h2>${book.title}</h2>
+    <i class="far fa-trash-alt remove"></i>
+    <div class="book-content-wrapper">
+        <div class="book-title">
+            <h3>${book.title}</h3>
+        </div>
+        <div class="author-wrapper">
+            <span>Author: </span>
+            <span class="author">${book.author}</span>
+        </div>
+        <div class="pages-wrapper">
+            <span>Number of pages: </span>
+            <span>${book.pages}<span>
+        </div>
     </div>
-    <h3>${book.author}</h3>
     `;
 
     // isRead Button
@@ -173,8 +185,8 @@ UserInterface.prototype.removeBookUI = function (e) {
     const element = e.target;
     if (element.classList.contains('remove')) {
         const book = e.target.parentElement;
-        const title = book.getElementsByTagName('h2')[0].textContent;
-        const author = book.getElementsByTagName('h3')[0].textContent;
+        const title = book.getElementsByTagName('h3')[0].textContent;
+        const author = book.querySelector('.author').textContent;
         this.showAlertUI(`Removed ${title}`);
 
         // remove from local storage
@@ -195,8 +207,9 @@ UserInterface.prototype.checkCompleteBookUI = function (e) {
     const element = e.target;
     if (element.classList.contains('isRead')) {
         const book = e.target.parentElement;
-        const title = book.getElementsByTagName('h2')[0].textContent;
-        const author = book.getElementsByTagName('h3')[0].textContent;
+        const title = book.getElementsByTagName('h3')[0].textContent;
+        const author = book.querySelector('.author').textContent;
+
 
         const isReadButton = element;
         isReadButton.classList.toggle('complete-book');
