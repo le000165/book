@@ -6,11 +6,11 @@
     --light-blue: #dbe2ef;
     --blue2: #a2d5f2;
     --black: #303841;
-    --dark1: #212121;
+    --dark1: #206a5d;
     --green: #00af91;
     --light-green: #16c79a;
     --blue: #3f72af;
-    --yellow: #f3c623;
+    --yellow: #ffe227;
     --red: #eb596e;
     --orange: #ffa45b;
 }
@@ -48,10 +48,11 @@ header {
     width: 100%;
     background: var(--dark1);
     color: var(--white);
-    padding: 0.5rem 5rem;
+    padding: 0.5rem 3rem;
 }
 
 .logo-container {
+    animation: 1s ease-out 0s 1 slideInFromLeft;
     display: flex;
     justify-content: space-between;
     position: relative;
@@ -66,6 +67,25 @@ header {
 
 .logo-container img {
     width: 5rem;
+    height: auto;
+}
+
+.github {
+    animation: 1s ease-out 0s 1 slideInFromRight;
+}
+
+.github i {
+    font-size: 3rem;
+    cursor: pointer;
+
+}
+
+.github i:hover {
+    color: var(--yellow);
+}
+
+a {
+    color: inherit;
 }
 
 #overlay {
@@ -187,8 +207,7 @@ header {
     height: 4rem;
     bottom: 8%;
     right: 3%;
-    background-color: var(--green);
-    border: 0.15em solid var(--light-blue);
+    background-color: var(--dark1);
     transition: all 0.5s ease;
 }
 
@@ -196,6 +215,7 @@ header {
     background-color: var(--light-blue);
     border: 0.15em solid var(--light-green);
     color: var(--green);
+    transform: scale(0.9);
 }
 
 #submit-btn {
@@ -239,6 +259,7 @@ header {
     border-top-right-radius: 1rem;
     margin: 2rem 5rem;
     flex-direction: column;
+    animation: 1s ease-out 0s 1 slideInFromLeft;
     transition: all 0.5s ease;
 }
 
@@ -297,15 +318,15 @@ header {
     font-size: 1.2rem;
     display: block;
     position: absolute;
-    top: 6rem;
+    top: 7rem;
     width: 50%;
     padding: 0.3rem;
     text-align: center;
     transition: all 1s ease-in;
     border-bottom-left-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    background: #c9cbff;
-    color: var(--dark1);
+    background: #b8beff;
+    color: var(--black);
 }
 
 
@@ -323,6 +344,43 @@ header {
     opacity: 0;
 }
 
+/* key frames */
+@keyframes slideInFromLeft {
+    0% {
+        transform: translateX(-200%);
+    }
+
+    60% {
+        transform: translateX(5%);
+    }
+
+    80% {
+        transform: translateX(-5%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideInFromRight {
+    0% {
+        transform: translateX(200%);
+    }
+
+    60% {
+        transform: translateX(-5%);
+    }
+
+    80% {
+        transform: translateX(5%);
+    }
+
+    100% {
+        transform: translateX(0);
+    }
+}
+
 
 /*------------------ Mobile Responsive ----------------*/
 
@@ -337,6 +395,10 @@ header {
     body {
         background: linear-gradient(#e66465, #9198e5);
         background-attachment: fixed;
+    }
+
+    header {
+        padding: 0.5rem 2rem;
     }
 
     .add-btn {
@@ -368,8 +430,8 @@ header {
 
 
     .logo-container img {
-        width: 5rem;
-        height: 5rem;
+        width: 4.5rem;
+        height: 4.5rem;
     }
 
     .books-container {

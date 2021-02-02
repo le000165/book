@@ -18,7 +18,7 @@ function Book(title, author, pages, isRead) {
 
 // capitalize each letter in a string, using for author name and title name
 function capitalize(str) {
-    let strArray = str.split(' ');
+    let strArray = str.trim().split(' ');
     for (let i = 0; i < strArray.length; i++) {
         strArray[i] = strArray[i][0].toUpperCase() + strArray[i].substr(1);
     }
@@ -108,11 +108,11 @@ UserInterface.prototype.addBookToList = function (book) {
     <i class="far fa-trash-alt remove"></i>
     <div class="book-content-wrapper">
         <div class="book-title">
-            <h3>${capitalize(book.title)}</h3>
+            <h3>${book.title}</h3>
         </div>
         <div class="author-wrapper">
             <span>Author: </span>
-            <span class="author">${capitalize(book.author)}</span>
+            <span class="author">${book.author}</span>
         </div>
         <div class="pages-wrapper">
             <span>Number of pages: </span>
@@ -143,7 +143,6 @@ UserInterface.prototype.addBookToList = function (book) {
 UserInterface.prototype.openAddForm = function () {
     popupSection.style.transform = "scale(1)";
     overlay.style.opacity = 1;
-
     // disable add button when the form is open
     addButton.classList.toggle('disable-event');
 }
@@ -169,7 +168,7 @@ UserInterface.prototype.submitBook = function (event) {
     const isReadInput = document.querySelector('#is-read').value;
 
     // Instantiate a book
-    const book = new Book(titleInput, authorInput, pagesInput, isReadInput);
+    const book = new Book(capitalize(titleInput), capitalize(authorInput), pagesInput, isReadInput);
 
     // Add book to UI
     this.addBookToList(book);
