@@ -6,7 +6,7 @@
     --light-blue: #dbe2ef;
     --blue2: #a2d5f2;
     --black: #303841;
-    --dark1: #112d4e;
+    --dark1: #212121;
     --green: #00af91;
     --light-green: #16c79a;
     --blue: #3f72af;
@@ -199,7 +199,7 @@ header {
 }
 
 #submit-btn {
-    border: 0.15rem solid var(--yellow);
+    border: 0.2rem solid var(--yellow);
     color: var(--white);
     background-color: var(--dark1);
     margin: 0 auto;
@@ -342,16 +342,16 @@ header {
     .add-btn {
         border: none;
         outline: none;
+        background: var(--dark1);
         position: fixed;
         display: flex;
         justify-content: center;
         align-items: center;
-        width: 5rem;
-        height: 5rem;
+        width: 4.5rem;
+        height: 4.5rem;
         right: 5%;
         bottom: 5%;
-        font-size: 2rem;
-        background: var(--dark1);
+        font-size: 1.7rem;
     }
 
     .add-btn:hover {
@@ -391,7 +391,7 @@ header {
     }
 
     .book-title h3 {
-        color: var(--dark1)
+        color: #1a1c20;
     }
 
 
@@ -435,16 +435,19 @@ header {
     .book {
         font-size: 1.2rem;
         transition: all 0.5s ease;
-        background-color: rgba(255, 255, 255, .15);
-        backdrop-filter: blur(5px);
         margin: 4rem;
     }
 
+
+
     .book-title h3 {
-        color: var(--dark1)
+        color: var(--yellow)
     }
 
     .add-btn {
+        border: none;
+        outline: none;
+        background: var(--dark1);
         position: fixed;
         display: flex;
         justify-content: center;

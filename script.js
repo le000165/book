@@ -18,7 +18,6 @@ function Book(title, author, pages, isRead) {
 
 // capitalize each letter in a string, using for author name and title name
 function capitalize(str) {
-    console.log(str);
     let strArray = str.split(' ');
     for (let i = 0; i < strArray.length; i++) {
         strArray[i] = strArray[i][0].toUpperCase() + strArray[i].substr(1);
@@ -59,7 +58,8 @@ BookStorage.prototype.addBookToStorage = function (book) {
 // removeBookInStorage
 BookStorage.prototype.removeBookInStorage = function (title, author) {
     this.getBooksFromStorage().forEach((book, index) => {
-        if (book.title == title && book.author == author) {
+        if (book.title.toLowerCase() == title.toLowerCase() &&
+            book.author.toLowerCase() == author.toLowerCase()) {
             this.books.splice(index, 1);
         }
     });
@@ -70,7 +70,8 @@ BookStorage.prototype.removeBookInStorage = function (title, author) {
 // update reading status by title and author name
 BookStorage.prototype.changeBookStatusInStorage = function (title, author) {
     this.getBooksFromStorage().forEach((b) => {
-        if (b.title == title && b.author == author) {
+        if (b.title.toLowerCase() == title.toLowerCase() &&
+            b.author.toLowerCase() == author.toLowerCase()) {
             if (b.isRead) {
                 b.isRead = false;
             } else {
@@ -217,7 +218,6 @@ UserInterface.prototype.checkCompleteBookUI = function (e) {
         const book = e.target.parentElement;
         const title = book.getElementsByTagName('h3')[0].textContent;
         const author = book.querySelector('.author').textContent;
-
 
         const isReadButton = element;
         isReadButton.classList.toggle('complete-book');
