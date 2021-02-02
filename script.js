@@ -16,7 +16,15 @@ function Book(title, author, pages, isRead) {
     this.isRead = isRead;
 }
 
-
+// capitalize each letter in a string, using for author name and title name
+function capitalize(str) {
+    console.log(str);
+    let strArray = str.split(' ');
+    for (let i = 0; i < strArray.length; i++) {
+        strArray[i] = strArray[i][0].toUpperCase() + strArray[i].substr(1);
+    }
+    return strArray.join(' ');
+}
 
 // ================== Storage: handles books data in local storage for now ==========
 // Storage must be instantiated before using
@@ -99,11 +107,11 @@ UserInterface.prototype.addBookToList = function (book) {
     <i class="far fa-trash-alt remove"></i>
     <div class="book-content-wrapper">
         <div class="book-title">
-            <h3>${book.title}</h3>
+            <h3>${capitalize(book.title)}</h3>
         </div>
         <div class="author-wrapper">
             <span>Author: </span>
-            <span class="author">${book.author}</span>
+            <span class="author">${capitalize(book.author)}</span>
         </div>
         <div class="pages-wrapper">
             <span>Number of pages: </span>
