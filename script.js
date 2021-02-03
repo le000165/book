@@ -13,7 +13,9 @@ function Book(title, author, pages, isRead) {
     this.title = this.capitalize(title);
     this.author = this.capitalize(author);
     this.pages = pages;
-    this.isRead = isRead;
+    this.isRead = this.setRead(isRead);
+
+
 }
 
 
@@ -25,6 +27,13 @@ Book.prototype.capitalize = function (str) {
     }
     return strArray.join(' ');
 }
+
+Book.prototype.setRead = function (isRead) {
+    return (isRead === '0') ? false : true;
+}
+
+
+
 
 // ================== Storage: handles books data in local storage for now ==========
 // Storage must be instantiated before using
@@ -128,11 +137,14 @@ UserInterface.prototype.addBookToList = function (book) {
     const readButton = document.createElement("div");
     readButton.className = 'isRead';
 
+    // console.log(book.isRead);
     // check isRead or not
     if (book.isRead) {
         readButton.textContent = 'Read';
         readButton.classList.add('complete-book');
+
     } else {
+        console.log(book.isRead);
         readButton.textContent = 'Not Read Yet';
     }
 
@@ -175,6 +187,7 @@ UserInterface.prototype.submitBook = function (event) {
 
     // Add book to UI
     this.addBookToList(book);
+    console.log(book);
 
     // Add book to local storage
     this.storage.addBookToStorage(book);

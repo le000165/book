@@ -423,7 +423,10 @@ a {
     }
 
     .alert {
-        border-radius: 3rem;
+        width: 80vw;
+        background-color: #FFDEE9;
+        background-image: linear-gradient(0deg, #FFDEE9 0%, #B5FFFC 100%);
+        border-radius: 0.5rem;
         top: 5.5rem;
         position: fixed;
     }
@@ -455,7 +458,6 @@ a {
     .book-title h3 {
         color: #1a1c20;
     }
-
 
     /* Form style */
     #add-form input {
