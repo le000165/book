@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500&family=Roboto+Slab&display=swap');
 
-
 :root {
     --white: #fafafa;
     --light-blue: #dbe2ef;
@@ -67,7 +66,7 @@ header {
 
 .logo-container img {
     width: 5rem;
-    height: auto;
+    height: 5rem;
 }
 
 .github {
