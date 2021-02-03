@@ -10,14 +10,15 @@ const header = document.getElementsByTagName('header')[0];
 
 // ================== Book: represent a book ========================
 function Book(title, author, pages, isRead) {
-    this.title = title;
-    this.author = author;
+    this.title = this.capitalize(title);
+    this.author = this.capitalize(author);
     this.pages = pages;
     this.isRead = isRead;
 }
 
+
 // capitalize each letter in a string, using for author name and title name
-function capitalize(str) {
+Book.prototype.capitalize = function (str) {
     let strArray = str.trim().split(' ');
     for (let i = 0; i < strArray.length; i++) {
         strArray[i] = strArray[i][0].toUpperCase() + strArray[i].substr(1);
@@ -30,8 +31,10 @@ function capitalize(str) {
 // will cause error if calling anythying outside of Storage scope
 // user can not access and change local variable of Storage unless accessing by Storage object
 function BookStorage() {
-    // Initializing the books item in the local storage
-    this.books = [];
+    // Initializing with a default sample book
+    const sample = new Book('the old man and the sea', 'Ernest Hemingway', 127, false);
+    // userStorage.addBookToStorage(sample);
+    this.books = [sample];
 }
 
 // reset local storage when there is any change to the books array above
@@ -168,7 +171,7 @@ UserInterface.prototype.submitBook = function (event) {
     const isReadInput = document.querySelector('#is-read').value;
 
     // Instantiate a book
-    const book = new Book(capitalize(titleInput), capitalize(authorInput), pagesInput, isReadInput);
+    const book = new Book(titleInput, authorInput, pagesInput, isReadInput);
 
     // Add book to UI
     this.addBookToList(book);
@@ -250,6 +253,8 @@ UserInterface.prototype.showAlertUI = function (message) {
 // ------------------ Events Handler -----------------
 // setup
 const userStorage = new BookStorage()
+
+//creating a book UI loading from the created storage
 const ui = new UserInterface(userStorage);
 
 // Event: Display books
